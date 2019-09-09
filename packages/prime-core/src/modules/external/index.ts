@@ -36,6 +36,9 @@ export const createExternal = async (connection: Connection) => {
   const documentTransformer = new DocumentTransformer();
   const schemas = await getRepository(Schema).find();
 
+  log('schema:');
+  log(schemas);
+
   const types = new Map();
   const queries: { [key: string]: any } = {};
   const mutations: { [key: string]: any } = {};
@@ -45,6 +48,8 @@ export const createExternal = async (connection: Connection) => {
     if (schema.variant === SchemaVariant.Template) {
       continue;
     }
+
+    log('- ' + schema.name);
 
     if (schema.variant === SchemaVariant.Slice) {
       // maybe do something special?

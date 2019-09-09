@@ -1,3 +1,5 @@
+**/.DS_STORE
+
 lib/
 node_modules/
 coverage/
@@ -18,3 +20,6 @@ packages/*/package-lock.json
 packages/*/*.tgz
 packages/prime-ui/build
 packages/*/junit.xml
+
+packages/iris-img-assets/uploads/*
+!packages/iris-img-assets/uploads/.gitkeep

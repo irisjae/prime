@@ -24,10 +24,8 @@ const getInitialFile = (value?: { url: string } | string) => {
     uid: '-1',
     status: 'done',
     url: value.url,
-    imageUrl: value.url.replace(/\.[a-z]{3,4}$/, '.png'),
-    thumbUrl: value.url
-      .replace('/image/upload/', '/image/upload/w_100,h_100,c_fill/')
-      .replace(/\.[a-z]{3,4}$/, '.png'),
+    imageUrl: value.url,
+    thumbUrl: value.url,
     width: null,
     height: null,
   };
@@ -40,24 +38,8 @@ export class InputComponent extends React.PureComponent<PrimeFieldProps> {
     cropVisible: false,
     cropOffset: { x: 0, y: 0 },
     cropZoom: 1,
-    uploadPayload: {
-      signature: '',
-      timestamp: 0,
-    },
     file: getInitialFile(get(this.props, 'initialValue')),
   };
-
-  public url = (() => {
-    try {
-      return new URL(
-        String(this.props.stores.Settings.env.CLOUDINARY_URL).replace(/^cloudinary/, 'http')
-      );
-    } catch (err) {
-      console.warn('No "CLOUDINARY_URL" set'); // tslint:disable-line no-console
-    }
-
-    return new URL('http://localhost');
-  })();
 
   private cropPixels = { x: 0, y: 0, width: 0, height: 0 };
 
@@ -73,36 +55,6 @@ export class InputComponent extends React.PureComponent<PrimeFieldProps> {
     }
   }
 
-  public onBeforeUpload = async () => {
-    const { username, password } = this.url;
-
-    const timestamp = Math.round(Date.now() / 1000);
-    const params = {
-      upload_preset: 'prime-asset',
-      image_metadata: true,
-      timestamp,
-    };
-
-    const toSign = Object.entries(params)
-      .filter(([key, value]) => value && String(value).length > 0)
-      .map(([key, value]: [string, any]) => `${key}=${[].concat(value || []).join(',')}`)
-      .sort()
-      .join('&');
-
-    const msgBuffer = new TextEncoder().encode(toSign + password);
-    const hashBuffer = await crypto.subtle.digest('SHA-1', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => `00${b.toString(16)}`.slice(-2)).join('');
-
-    this.setState({
-      uploadPayload: {
-        signature: hashHex,
-        api_key: username,
-        ...params,
-      },
-    });
-  };
-
   public onChange = (e: UploadChangeParam) => {
     const { form, path } = this.props;
     const files = e.fileList.slice(0);
@@ -112,10 +64,8 @@ export class InputComponent extends React.PureComponent<PrimeFieldProps> {
       file = files[0] as PrimeUploadFile;
       if (file.status === 'done' && file.response) {
         file.url = file.response.url;
-        file.imageUrl = file.response.url.replace(/\.[a-z]{3,4}$/, '.png');
-        file.thumbUrl = file.response.url
-          .replace('/image/upload/', '/image/upload/w_100,h_100,c_fill/')
-          .replace(/\.[a-z]{3,4}$/, '.png');
+        file.imageUrl = file.response.url;
+        file.thumbUrl = file.response.url;
       }
     }
 
@@ -236,7 +186,7 @@ export class InputComponent extends React.PureComponent<PrimeFieldProps> {
   // tslint:disable-next-line max-func-body-length
   public render() {
     const { form, field, path, initialValue } = this.props;
-    const { previewVisible, cropVisible, cropOffset, cropZoom, uploadPayload, file } = this.state;
+    const { previewVisible, cropVisible, cropOffset, cropZoom, file } = this.state;
     const { getFieldDecorator } = form;
     const initialCrops = get(initialValue, 'crops', []);
     const crops = get(field.options, 'crops', []).map((crop: { name: string }) => ({
@@ -262,12 +212,10 @@ export class InputComponent extends React.PureComponent<PrimeFieldProps> {
         <Form.Item label={field.title}>
           <div style={{ width: 112, height: 112 }} key="noop">
             <Upload
-              name="file"
-              action={`https://api.cloudinary.com/v1_1/${this.url.hostname}/upload`}
-              data={uploadPayload}
+              name="asset"
+              action={`http://cms.pons.ai:4001/assets/upload`}
               listType="picture-card"
               multiple={false}
-              beforeUpload={this.onBeforeUpload}
               onChange={this.onChange}
               onPreview={this.onPreview}
               fileList={((file ? [file] : []) as unknown) as UploadFile[]}
