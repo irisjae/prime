@@ -4,6 +4,7 @@
     "node": ">= 10.*"
   },
   "scripts": {
+    "init": "yarn setup && yarn compile",
     "setup": "lerna bootstrap && yarn run link",
     "start": "lerna run dev --stream",
     "link": "lerna exec -- yarn link",
@@ -91,6 +92,7 @@
     "tslint-junit-formatter": "5.1.0",
     "typedoc": "0.14.2",
     "typedoc-plugin-lerna": "0.1.0",
-    "typescript": "3.5.1"
+    "typescript": "3.5.1",
+    "yarn": "^1.17.3"
   }
 }
