@@ -210,27 +210,25 @@ export class InputComponent extends React.PureComponent<PrimeFieldProps> {
     return (
       <>
         <Form.Item label={field.title}>
-          <div style={{ width: 112, height: 112 }} key="noop">
-            <Upload
-              name="asset"
-              action={`http://cms.pons.ai:4001/assets/upload`}
-              listType="picture-card"
-              multiple={false}
-              onChange={this.onChange}
-              onPreview={this.onPreview}
-              fileList={((file ? [file] : []) as unknown) as UploadFile[]}
-            >
-              {!file && (
-                <div>
-                  <Icon type="plus" />
-                  <div className="ant-upload-text">Upload</div>
-                </div>
-              )}
-            </Upload>
-          </div>
-
           {getFieldDecorator(`${path}.url`, { initialValue: get(file, 'url', '') })(
-            <input type="hidden" />
+            <div style={{ width: 112, height: 112 }} key="noop">
+              <Upload
+                name="asset"
+                action={`http://cms.pons.ai:4001/assets/upload`}
+                listType="picture-card"
+                multiple={false}
+                onChange={this.onChange}
+                onPreview={this.onPreview}
+                fileList={((file ? [file] : []) as unknown) as UploadFile[]}
+              >
+                {!file && (
+                  <div>
+                    <Icon type="plus" />
+                    <div className="ant-upload-text">Upload</div>
+                  </div>
+                )}
+              </Upload>
+            </div>
           )}
 
           {crops.map((crop: { name: string }, index: number) => (
