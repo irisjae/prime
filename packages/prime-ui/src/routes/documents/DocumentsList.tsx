@@ -191,7 +191,7 @@ export const DocumentsList = ({ match, history }: any) => {
             sorter: false,
             width: '52px',
             render(text: string, record: any) {
-              let backgroundColor = record.publishedAt || record.published ? '#79cea3' : '#faad14';
+              let backgroundColor = record.publishedAt || record.published ? '#A8B7DB' : '#faad14';
               let icon = record.publishedAt ? 'caret-right' : 'exclamation';
               let dot = !record.published || record.publishedAt !== null ? false : true;
 

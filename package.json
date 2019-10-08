@@ -4,7 +4,7 @@
     "node": ">= 10.*"
   },
   "scripts": {
-    "go": "cd packages/iris-img-assets; PROTOCOL='http://' HOSTNAME='cms.pons.ai' PORT='4001' npm start & cd -; cd packages/prime-core; DEBUG='prime:*' CORE_URL='http://cms.pons.ai:4000' PROTOCOL='http://' HOSTNAME='cms.pons.ai' PORT=4000 npm start",
+    "go": "cd packages/iris-img-assets; PROTOCOL='http://' HOSTNAME='pons.ai' PORT='4001' npm start & cd -; cd packages/prime-core; DEBUG='prime:*' CORE_URL='http://cms.pons.ai:4000' PROTOCOL='http://' HOSTNAME='pons.ai' PORT=4000 npm start",
     "init": "yarn setup && yarn compile",
     "setup": "lerna bootstrap && yarn run link",
     "start": "lerna run dev --stream",
@@ -65,7 +65,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/birkir/prime"
+    "url": "git+https://github.com/birkir/prime.git"
   },
   "resolutions": {
     "typescript": "3.5.1",
@@ -95,5 +95,18 @@
     "typedoc-plugin-lerna": "0.1.0",
     "typescript": "3.5.1",
     "yarn": "^1.17.3"
-  }
+  },
+  "name": "prime",
+  "description": "<p align=\"center\">   <a href=\"https://docs.primecms.app\"><img alt=\"Prime\" width=\"330px\" src=\"docs/_assets/prime.png\" /></a> </p> <p align=\"center\"><strong>Open Source GraphQL CMS</strong></p>",
+  "bugs": {
+    "url": "https://github.com/birkir/prime/issues"
+  },
+  "homepage": "https://github.com/birkir/prime#readme",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {},
+  "author": ""
 }
