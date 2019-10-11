@@ -26,8 +26,8 @@ module.exports = function override(config, env) {
 
   config = rewireLess.withLoaderOptions({
     modifyVars: {
-      '@primary-color': '#318E9F',
-      '@link-color': '#318E9F',
+      '@primary-color': '#51B37F',
+      '@link-color': '#51B37F',
       '@font-family':
         '"Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
       '@code-family':
@@ -40,7 +40,7 @@ module.exports = function override(config, env) {
       // '@padding-sm': '16px',
       // '@padding-xs': '8px',
 
-      '@layout-header-background': '#1F3E44',
+      '@layout-header-background': '#000000',
       // @link-color: #1890ff;                            // link color
       // @success-color: #52c41a;                         // success state color
       // @warning-color: #faad14;                         // warning state color

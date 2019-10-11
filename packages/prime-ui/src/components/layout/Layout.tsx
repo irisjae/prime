@@ -23,7 +23,7 @@ export const Layout = withRouter(({ children, history, location }: any) => {
       >
         <Header className="prime__sidebar__header">
           <Link to="/" className="prime__sidebar__logo">
-            pons
+            <img src="/pons.png" width={64} height={64} />
           </Link>
         </Header>
         <Menu

@@ -147,7 +147,7 @@
   align-items: center;
   justify-content: center;
   color: #ffffff8a;
-  background-color: rgba(24, 50, 54, 0.86);
+  background-color: rgba(0,0,0);
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
   cursor: pointer;
@@ -181,7 +181,7 @@
 
 .prime__sidebar .ant-menu.ant-menu-dark .ant-menu-item-selected,
 .prime__sidebar .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
-  background-color: rgba(49, 142, 159, 0.5);
+  background-color: rgba(246, 232, 148, 0.7);
 }
 
 .prime__settings__table .ant-row,
