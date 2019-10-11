@@ -5,6 +5,9 @@ import { getRepository, In } from 'typeorm';
 import { Document } from '../entities/Document';
 import { Schema } from '../entities/Schema';
 import { SchemaField } from '../entities/SchemaField';
+import debug from 'debug';
+
+export const log = debug('prime:document-transformer');
 
 const Types = {
   ROOT: 0,
@@ -28,6 +31,7 @@ export class DocumentTransformer {
 
   public getFields = async (schema: Schema): Promise<SchemaField[]> => {
     const schemaIds: string[] = [schema.id];
+    log(schema);
 
     if (schema) {
       schemaIds.push(...get(schema, 'settings.schemaIds', []));
@@ -106,6 +110,7 @@ export class DocumentTransformer {
             })
           )).filter(item => Object.keys(item).length > 0);
         } else {
+          log(value);
           const sfields = await this.getFields({ id: value.__inputname } as any);
           value = await this.transform(sfields, value, schema, io, Types.SLICE);
           if (Object.keys(value).length === 0) {

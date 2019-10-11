@@ -4,7 +4,7 @@
     "node": ">= 10.*"
   },
   "scripts": {
-    "go": "cd packages/iris-img-assets; PROTOCOL='http://' HOSTNAME='cms.pons.ai' PORT='4001' npm start & cd -; cd packages/prime-core; DEBUG='prime:*' CORE_URL='http://cms.pons.ai:4000' PROTOCOL='http://' HOSTNAME='cms.pons.ai' PORT=4000 npm start",
+    "go": "cd packages/iris-img-assets; PROTOCOL='http://' HOSTNAME='cms.pons.ai' PORT='4001' npm start & cd -; cd packages/prime-core; DEBUG='prime:*' CORE_URL='http://cms.pons.ai:4000' PROTOCOL='http://' HOSTNAME='cms.pons.ai' PORT=4000 NODE_OPTIONS='--stack-trace-limit=10000' npm start",
     "init": "yarn setup && yarn compile",
     "setup": "lerna bootstrap && yarn run link",
     "start": "lerna run dev --stream",

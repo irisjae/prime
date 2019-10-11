@@ -49,7 +49,6 @@ export const createServer = async ({ port, connection }: ServerConfig) => {
     externalServer.context = external.context;
 
     if (config.sofaApi) {
-      log ('attaching sofa');
       app.use(
         `${config.path}api`,
         sofa({
